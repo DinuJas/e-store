@@ -1,0 +1,81 @@
+<?php
+session_start();
+include "db/db.php";
+
+// Get Username
+$user_id = $_SESSION["user_id"];
+
+$stmt = $conn->prepare("SELECT username FROM users WHERE user_id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result && $row = $result->fetch_assoc())
+{
+    $username = $row["username"];
+}
+
+// Get product info
+$stmt = $conn->prepare("SELECT image, name, description, price FROM products");
+$stmt->execute();
+$product_info = $stmt->get_result();
+
+
+
+$stmt->close();
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>E-store</title>
+        <link rel="stylesheet" href="css/index_style.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                <div class="inner-header">
+                    <img src="pictures/temp_logo.jpg" width="100px">
+                    
+                    <form>
+                        <input type="search" placeholder="Search">
+                        <button>Search</button>
+                    </form>
+
+                    <div>
+                        <img src="pictures/temp_logo.jpg" width="50px" height="50px">
+                        <?php echo htmlspecialchars($username) ?>
+                    </div>
+
+                    <img src="pictures/temp_basket.jpg" width="50px" height="50px">
+                </div>
+            </header>
+
+            <main>
+                <div class="inner-main">
+                    <h1>TEST PRODUCTS</h1>
+                    <div class="product-page">
+                        <?php while ($row = $product_info->fetch_assoc()): ?>
+                            <div class="product">
+                                <a href="#">
+                                    <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>.webp" width="350px" height="400px">
+                                    <span><?php echo htmlspecialchars($row["name"]); ?></span>
+                                    <span><?php echo htmlspecialchars($row["description"]); ?></span>
+                                    <span><?php echo htmlspecialchars($row["price"]); ?>,-</span>
+                                </a>
+                            </div>
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+            </main>
+
+            <footer>
+                <p> &copy; 2025 Jason. All Rights Reserved</p>
+            </footer>
+        </div>
+    </body>
+</html>
