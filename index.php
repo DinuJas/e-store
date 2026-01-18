@@ -16,11 +16,9 @@ if ($result && $row = $result->fetch_assoc())
 }
 
 // Get product info
-$stmt = $conn->prepare("SELECT image, name, description, price FROM products");
+$stmt = $conn->prepare("SELECT product_id, image, name, description, price FROM products");
 $stmt->execute();
 $product_info = $stmt->get_result();
-
-
 
 $stmt->close();
 $conn->close();
@@ -61,8 +59,8 @@ $conn->close();
                     <div class="product-page">
                         <?php while ($row = $product_info->fetch_assoc()): ?>
                             <div class="product">
-                                <a href="#">
-                                    <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>.webp" width="350px" height="400px">
+                                <a href="product_page.php?product_id=<?php echo htmlspecialchars($row["product_id"]) ?>">
+                                    <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>" width="350px" height="400px">
                                     <span><?php echo htmlspecialchars($row["name"]); ?></span>
                                     <span><?php echo htmlspecialchars($row["description"]); ?></span>
                                     <span><?php echo htmlspecialchars($row["price"]); ?>,-</span>
