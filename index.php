@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "db/db.php";
+include "header.php";
 
 // Get Username
 $user_id = $_SESSION["user_id"];
@@ -35,24 +36,6 @@ $conn->close();
 
     <body>
         <div class="container">
-            <header>
-                <div class="inner-header">
-                    <img src="pictures/temp_logo.jpg" width="100px">
-                    
-                    <form>
-                        <input type="search" placeholder="Search">
-                        <button>Search</button>
-                    </form>
-
-                    <div>
-                        <img src="pictures/temp_logo.jpg" width="50px" height="50px">
-                        <?php echo htmlspecialchars($username) ?>
-                    </div>
-
-                    <img src="pictures/temp_basket.jpg" width="50px" height="50px">
-                </div>
-            </header>
-
             <main>
                 <div class="inner-main">
                     <h1>TEST PRODUCTS</h1>

@@ -1,7 +1,18 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) 
+session_start();
+require_once "db/db.php";
+
+$user_id = $_SESSION["user_id"];
+
+// Getting username
+$stmt = $conn->prepare("SELECT username FROM users WHERE user_id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result && $row = $result->fetch_assoc())
 {
-    session_start();
+    $username = $row["username"];
 }
 ?>
 
