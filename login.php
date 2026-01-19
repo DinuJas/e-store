@@ -49,21 +49,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
+        <link rel="stylesheet" href="css/register_style.css">    
     </head>
 
     <body>
-        <h2>Login</h2>    
+        <div class="container">
+            <div class="register-box">
+                <h2>Login</h2>    
 
-        <form method="post">
-            <label for="email">Email</label><br>
-            <input type="email" name="email" placeholder="Enter your email" required><br><br>
+                <form method="post">
+                    <label for="email">Email</label><br>
+                    <input type="email" name="email" placeholder="Enter your email" required><br><br>
 
-            <label for="password">Password</label><br>
-            <input type="password" name="password" placeholder="Enter your password" required><br>
+                    <label for="password">Password</label><br>
+                    <input type="password" name="password" placeholder="Enter your password" required><br>
 
-            <button type="submit">Login</button><br><br>
+                    <button type="submit">Login</button><br><br>
 
-            <span>Don't have an account? <a href="register.html">Register here</a></span>
-        </form>
+                    <span>Don't have an account? <a href="register.php">Register here</a></span>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

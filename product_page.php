@@ -31,17 +31,19 @@ if (isset($_GET["product_id"]))
 
 <div class="container">
     <main>
-        <div class="product-page">
-            <div class="product">
-                <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>" width="350px" height="400px">
-                <span><?php echo htmlspecialchars($row["name"]); ?></span>
-                <span><?php echo htmlspecialchars($row["description"]); ?></span>
-                <span><?php echo htmlspecialchars($row["price"]); ?>,-</span>
+        <div class="inner-main">
+            <div class="product-page">
+                <div class="product">
+                    <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>" width="350px" height="400px">
+                    <span><?php echo htmlspecialchars($row["name"]); ?></span>
+                    <span><?php echo htmlspecialchars($row["description"]); ?></span>
+                    <span><?php echo htmlspecialchars($row["price"]); ?>,-</span>
+                </div>
+
+                <div class="product-purchase">
+
+                </div> 
             </div>
-
-            <div class="product-purchase">
-
-            </div> 
         </div>
     </main>
 </div>
