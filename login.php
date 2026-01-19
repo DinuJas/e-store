@@ -3,6 +3,8 @@
 session_start();
 include "db/db.php";
 
+$error = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     $email = trim($_POST["email"]);
@@ -29,12 +31,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         }
         else
         {
-            echo "Invalid password <a href='login.php'>Login here</a>";
+            $error = "Invalid password <a href='login.php'>Login here</a>";
         }
     }
     else
     {
-        echo "Incorrect email or password <a href='login.php'>Login here</a>";
+        $error = "Incorrect email or password <a href='login.php'>Login here</a>";
     }
 
     $stmt->close();
@@ -56,6 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         <div class="container">
             <div class="register-box">
                 <h2>Login</h2>    
+
+                <div class="error">
+                    <?php if (isset($error)) { echo $error; } ?>
+                </div>
 
                 <form method="post">
                     <label for="email">Email</label><br>

@@ -68,6 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             <div class="register-box">
                 <h2>Register</h2>
 
+                <div class="error">
+                    <?php if (isset($error)) { echo $error; } ?>
+                </div>
+
                 <form method="post">
                     <label for="username">Username:</label><br>
                     <input type="text" name="username" placeholder="Enter your username" required><br><br>
