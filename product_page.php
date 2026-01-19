@@ -1,7 +1,7 @@
 <?php
 session_start();    
 require_once "db/db.php";
-include "header.php";
+require "includes/header.php";
 
 // Get product id
 if (isset($_GET["product_id"]))
@@ -15,7 +15,6 @@ if (isset($_GET["product_id"]))
     $product_info = $stmt->get_result();
     $row = $product_info->fetch_assoc();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -28,10 +27,10 @@ if (isset($_GET["product_id"]))
 </head>
 
 <body>
-
 <div class="container">
     <main>
         <div class="inner-main">
+            <h1> <?php echo htmlspecialchars($row["name"]); ?> | <?php echo htmlspecialchars($row["description"]) ?> </h1>
             <div class="product-page">
                 <div class="product">
                     <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>" width="350px" height="400px">
@@ -40,13 +39,20 @@ if (isset($_GET["product_id"]))
                     <span><?php echo htmlspecialchars($row["price"]); ?>,-</span>
                 </div>
 
+                <div class="product-info">
+                    Information
+                    Specs?
+                    Reviews?
+                </div>
+
                 <div class="product-purchase">
 
                 </div> 
             </div>
         </div>
     </main>
-</div>
 
+    <?php require "includes/footer.php"; ?>
+</div>
 </body>
 </html>

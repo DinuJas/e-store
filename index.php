@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "db/db.php";
-include "header.php";
+require "includes/header.php"; 
 
 // Get Username
 $user_id = $_SESSION["user_id"];
@@ -27,36 +27,34 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>E-store</title>
-        <link rel="stylesheet" href="css/index_style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-store</title>
+    <link rel="stylesheet" href="css/index_style.css">
+</head>
 
-    <body>
-        <div class="container">
-            <main>
-                <div class="inner-main">
-                    <h1>TEST PRODUCTS</h1>
-                    <div class="product-page">
-                        <?php while ($row = $product_info->fetch_assoc()): ?>
-                            <div class="product">
-                                <a href="product_page.php?product_id=<?php echo htmlspecialchars($row["product_id"]) ?>">
-                                    <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>" width="350px" height="400px">
-                                    <span><?php echo htmlspecialchars($row["name"]); ?></span>
-                                    <span><?php echo htmlspecialchars($row["description"]); ?></span>
-                                    <span><?php echo htmlspecialchars($row["price"]); ?>,-</span>
-                                </a>
-                            </div>
-                        <?php endwhile; ?>
+<body>
+<div class="container">
+    <main>
+        <div class="inner-main">
+            <h1>TEST PRODUCTS</h1>
+            <div class="product-page">
+                <?php while ($row = $product_info->fetch_assoc()): ?>
+                    <div class="product">
+                        <a href="product_page.php?product_id=<?php echo htmlspecialchars($row["product_id"]) ?>">
+                            <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>" width="350px" height="400px">
+                            <span><?php echo htmlspecialchars($row["name"]); ?></span>
+                            <span><?php echo htmlspecialchars($row["description"]); ?></span>
+                            <span><?php echo htmlspecialchars($row["price"]); ?>,-</span>
+                        </a>
                     </div>
-                </div>
-            </main>
-
-            <footer>
-                <p> &copy; 2025 Jason. All Rights Reserved</p>
-            </footer>
+                <?php endwhile; ?>
+            </div>
         </div>
-    </body>
+    </main>
+
+    <?php require "includes/footer.php"; ?>
+</div>
+</body>
 </html>
