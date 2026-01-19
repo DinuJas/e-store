@@ -18,7 +18,7 @@ if ($result && $row = $result->fetch_assoc())
 
 <header>
 <div class="inner-header">
-    <img src="pictures/temp_logo.jpg" width="100px">
+    <a href="index.php"><img src="pictures/temp_logo.jpg" width="100px"></a>
     
     <form>
         <input type="search" placeholder="Search">
