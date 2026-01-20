@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db/db.php";
+require_once "db/db.php";
 require "includes/header.php"; 
 
 // Get Username

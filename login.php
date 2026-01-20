@@ -1,7 +1,6 @@
 <?php
-
 session_start();
-include "db/db.php";
+require_once "db/db.php";
 
 $error = "";
 
@@ -31,12 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         }
         else
         {
-            $error = "Invalid password <a href='login.php'>Login here</a>";
+            $error = "Invalid password";
         }
     }
     else
     {
-        $error = "Incorrect email or password <a href='login.php'>Login here</a>";
+        $error = "Incorrect email or password";
     }
 
     $stmt->close();

@@ -1,5 +1,5 @@
 <?php
-include "db/db.php";
+require_once "db/db.php";
 
 $error = "";
 
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     // Check if email is already used
     if ($stmt->num_rows > 0)
     {
-        $error = "Email or Username is already registered! <a href='register.php'>Register here</a>";
+        $error = "Email or Username is already registered!";
     }
     else
     {    
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             
             if ($stmt->execute())
             {
-                echo "Registration successful! <a href='login.php'>Login here</a>";
+                echo "Registration successful!";
             }
             else
             {
@@ -73,16 +73,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                 </div>
 
                 <form method="post">
-                    <label for="username">Username:</label><br>
+                    <label>Username:</label><br>
                     <input type="text" name="username" placeholder="Enter your username" required><br><br>
 
-                    <label for="email">Email:</label><br>
+                    <label>Email:</label><br>
                     <input type="email" name="email" placeholder="Enter your email" required><br><br>
 
-                    <label for="password">Password:</label><br>
+                    <label>Password:</label><br>
                     <input type="password" name="password" placeholder="Enter your password" required><br><br>
 
-                    <label for="repeat_password">Repeat password:</label><br>
+                    <label>Repeat password:</label><br>
                     <input type="password" name="repeat_password" placeholder="Please repeat your password" required><br><br>
         
                     <button type="submit">Register</button><br><br>
