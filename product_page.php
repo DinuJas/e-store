@@ -42,8 +42,8 @@ if (isset($_GET["product_id"]))
                     </div>
 
                     <div class="product-purchase">
-                        <form>
-                            <input type="hidden" name="product_id" value="<?php echo (int)$product_id; ?>";>
+                        <form action="db/add_to_basket.php" method="POST">
+                            <input type="hidden" name="product_id" value="<?php echo (int)$product_id; ?>">
 
                             <label>Quantity</label>
                             <input type="number" name="quantity" value="1" min="1">
