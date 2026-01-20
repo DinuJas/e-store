@@ -35,7 +35,7 @@ main{
 .inner-main{
     width: 80%;
 }
-.product-page{
+.product-display{
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -61,4 +61,57 @@ footer{
     height: 100px;
     color: white;
     padding: 50px;
+}
+
+/* ---- PRODUCT PAGE SETTINGS ---- */
+.product-page {
+    margin-top: 30px;
+}
+
+/* TOP ROW */
+.product-top {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* PURCHASE BOX */
+.product-purchase {
+    background-color: lightgrey;
+    padding: 20px;
+    width: 250px;
+}
+
+.product-purchase form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-purchase input,
+.product-purchase button {
+    padding: 8px;
+    font-weight: bold;
+}
+
+/* INFO BELOW */
+.product-info {
+    margin-top: 30px;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+    .product-top {
+        flex-direction: column;
+    }
+
+    .product-purchase {
+        width: 100%;
+    }
+
+    .product-info {
+        max-width: 100%;
+    }
 }

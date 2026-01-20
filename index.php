@@ -39,7 +39,7 @@ $conn->close();
     <main>
         <div class="inner-main">
             <h1>TEST PRODUCTS</h1>
-            <div class="product-page">
+            <div class="product-display">
                 <?php while ($row = $product_info->fetch_assoc()): ?>
                     <div class="product">
                         <a href="product_page.php?product_id=<?php echo htmlspecialchars($row["product_id"]) ?>">

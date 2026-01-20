@@ -9,7 +9,7 @@ if (isset($_GET["product_id"]))
     $product_id = $_GET["product_id"];   
     
     // Get product info
-    $stmt = $conn->prepare("SELECT image, name, description, price FROM products WHERE product_id = ?");
+    $stmt = $conn->prepare("SELECT image, name, description, price, product_info FROM products WHERE product_id = ?");
     $stmt->bind_param("i", $product_id);
     $stmt->execute();
     $product_info = $stmt->get_result();
@@ -32,22 +32,34 @@ if (isset($_GET["product_id"]))
         <div class="inner-main">
             <h1> <?php echo htmlspecialchars($row["name"]); ?> | <?php echo htmlspecialchars($row["description"]) ?> </h1>
             <div class="product-page">
-                <div class="product">
-                    <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>" width="350px" height="400px">
-                    <span><?php echo htmlspecialchars($row["name"]); ?></span>
-                    <span><?php echo htmlspecialchars($row["description"]); ?></span>
-                    <span><?php echo htmlspecialchars($row["price"]); ?>,-</span>
+                <!-- TOP ROW -->
+                <div class="product-top">
+                    <div class="product">
+                        <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>" width="350px" height="400px">
+                        <span><?php echo htmlspecialchars($row["name"]); ?></span>
+                        <span><?php echo htmlspecialchars($row["description"]); ?></span>
+                        <span><?php echo htmlspecialchars($row["price"]); ?>,-</span>
+                    </div>
+
+                    <div class="product-purchase">
+                        <form>
+                            <input type="hidden" name="product_id" value="<?php echo (int)$product_id; ?>";>
+
+                            <label>Quantity</label>
+                            <input type="number" name="quantity" value="1" min="1">
+
+                            <button type="submit">Add to basket</button>
+                        </form>
+                    </div> 
                 </div>
 
+                <!-- BOTTOM ROW -->
+                <!-- nl2br adds new lines to product info if the text contains \n -->
+                <h3>Product info</h3>
+                <hr>
                 <div class="product-info">
-                    Information
-                    Specs?
-                    Reviews?
+                    <?php echo nl2br(htmlspecialchars($row["product_info"])) ?>
                 </div>
-
-                <div class="product-purchase">
-
-                </div> 
             </div>
         </div>
     </main>
