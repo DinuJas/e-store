@@ -80,6 +80,7 @@ foreach ($products as $item)
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
+                            <th>Delete</th>
                         </tr>
 
                         <?php foreach ($products as $item): ?>
@@ -93,6 +94,7 @@ foreach ($products as $item)
                                 <td data-label="Total">
                                     <?= number_format($item["price"] * $item["quantity"], 2, '.', ' ') ?>,-
                                 </td>
+                                <td><a href="db/remove_product.php?product_id=<?= $item["product_id"] ?>">X</a></td>
                             </tr>
                     <?php endforeach; ?>
                     </table>
