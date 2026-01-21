@@ -8,7 +8,7 @@ if (!isset($_SESSION["user_id"]))
     exit();
 }
 
-$user_id = $_SESSION["user_id"];
+$user_id = (int)$_SESSION["user_id"];
 
 // Get active basket for this user
 $stmt = $conn->prepare("
@@ -22,8 +22,8 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
-$basket_id = $row["basket_id"];
-$product_id = $_GET["product_id"];
+$basket_id = (int)$row["basket_id"];
+$product_id = (int)$_GET["product_id"];
 
 // Get quantity
 $stmt = $conn->prepare("
@@ -37,7 +37,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
-$quantity = $row["quantity"];
+$quantity = (int)$row["quantity"];
 
 // Reduce quantity
 if ($quantity > 1)
