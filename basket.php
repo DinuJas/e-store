@@ -111,7 +111,7 @@ foreach ($products as $item)
                         <p><strong>Total items:</strong> <?= htmlspecialchars($total_quantity) ?></p>
                         <p><strong>Total price:</strong> <?= number_format($total_price, 2, '.', ' ') ?>,-</p>
 
-                        <form>
+                        <form action="db/place_order.php?basket_id=<?= $basket_id ?>" method="POST">
                             <button type="submit">Place order</button>
                         </form>
                     <?php endif; ?>
