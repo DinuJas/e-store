@@ -115,3 +115,60 @@ footer{
         max-width: 100%;
     }
 }
+
+/* BASKET PAGE */
+.basket-page {
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    align-items: flex-start;
+}
+
+/* LEFT SIDE - PRODUCTS */
+.basket-info {
+    flex: 3;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.basket-info table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.basket-info th,
+.basket-info td {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.basket-info th {
+    background-color: #e0e0e0;
+}
+
+/* RIGHT SIDE - SUMMARY */
+.basket-summary {
+    flex: 1;
+    background-color: lightgrey;
+    padding: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.basket-summary h2 {
+    margin-top: 0;
+}
+
+.basket-summary p {
+    margin: 10px 0;
+}
+
+.basket-summary button {
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}

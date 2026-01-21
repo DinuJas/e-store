@@ -66,7 +66,7 @@ foreach ($products as $item)
     <div class="container">
         <main>
         <div class="inner-main">
-            <div class="bakset-page">
+            <div class="basket-page">
                 <div class="basket-info">
                 <h1>Basket</h1>
 
@@ -88,10 +88,10 @@ foreach ($products as $item)
                                     <img src="pictures/<?= htmlspecialchars($item["image"]) ?>" width="75px">
                                 </td>
                                 <td><?= htmlspecialchars($item["name"]) ?></td>
-                                <td><?= number_format(htmlspecialchars($item["price"]), 2) ?>,-</td>
+                                <td><?= number_format($item["price"], 2, '.', ' ') ?>,-</td>
                                 <td><?= (int)$item["quantity"] ?></td>
                                 <td>
-                                    <?= number_format(htmlspecialchars($item["price"] * $item["quantity"]), 2) ?>,-
+                                    <?= number_format($item["price"] * $item["quantity"], 2, '.', ' ') ?>,-
                                 </td>
                             </tr>
                     <?php endforeach; ?>
@@ -107,7 +107,7 @@ foreach ($products as $item)
                         <p>No items in basket.</p>
                     <?php else: ?>
                         <p><strong>Total items:</strong> <?= htmlspecialchars($total_quantity) ?></p>
-                        <p><strong>Total price:</strong> <?= number_format(htmlspecialchars($total_price), 2) ?>,-</p>
+                        <p><strong>Total price:</strong> <?= number_format($total_price, 2, '.', ' ') ?>,-</p>
 
                         <form>
                             <button type="submit">Place order</button>
