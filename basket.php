@@ -25,7 +25,18 @@ $row = $result->fetch_assoc();
 
 $basket_id = $row["basket_id"];
 
-$stmt = $conn->prepare("SELECT product_id, quantity FROM basket_products WHERE basket_id = ?");
+// Get products that are inside of the basket
+$stmt = $conn->prepare("
+    SELECT 
+        p.product_id,
+        p.name,
+        p.image,
+        p.price,
+        bp.quantity
+    FROM basket_products bp
+    JOIN products p ON bp.product_id = p.product_id
+    WHERE bp.basket_id = ?
+");
 $stmt->bind_param("i", $basket_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -50,9 +61,29 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                 <?php if (empty($products)): ?>
                     <p>Your basket is empty.</p>
                 <?php else: ?>
-                    <?php foreach ($products as $item): ?>
-                        <p>Product ID: <?= $item["product_id"] ?> - Qty: <?= $item["quantity"] ?></p>
+                    <table>
+                        <tr>
+                            <th>Pictures</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+
+                        <?php foreach ($products as $item): ?>
+                            <tr>
+                                <td>
+                                    <img src="pictures/<?= htmlspecialchars($item["image"]) ?>" width="75px">
+                                </td>
+                                <td><?= htmlspecialchars($item["name"]) ?></td>
+                                <td><?= number_format($item["price"], 2) ?>,-</td>
+                                <td><?= (int)$item["quantity"] ?></td>
+                                <td>
+                                    <?= number_format($item["price"] * $item["quantity"], 2) ?>,-
+                                </td>
+                            </tr>
                     <?php endforeach; ?>
+                    </table>
                 <?php endif; ?>
             </div>
         </main>
