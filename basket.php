@@ -84,13 +84,13 @@ foreach ($products as $item)
 
                         <?php foreach ($products as $item): ?>
                             <tr>
-                                <td>
+                                <td data-label="Image">
                                     <img src="pictures/<?= htmlspecialchars($item["image"]) ?>" width="75px">
-                                </td>
-                                <td><?= htmlspecialchars($item["name"]) ?></td>
-                                <td><?= number_format($item["price"], 2, '.', ' ') ?>,-</td>
-                                <td><?= (int)$item["quantity"] ?></td>
-                                <td>
+                                </td >
+                                <td data-label="Name"><?= htmlspecialchars($item["name"]) ?></td>
+                                <td data-label="Price"><?= number_format($item["price"], 2, '.', ' ') ?>,-</td>
+                                <td data-label="Quantity"><?= (int)$item["quantity"] ?></td>
+                                <td data-label="Total">
                                     <?= number_format($item["price"] * $item["quantity"], 2, '.', ' ') ?>,-
                                 </td>
                             </tr>

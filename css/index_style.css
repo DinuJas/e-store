@@ -44,6 +44,8 @@ main{
     background-color: grey;
     display: flex;
     flex-direction: column;
+    width: 350px;
+    height: 500px;
 }
 .product img{
     object-fit: contain;
@@ -171,4 +173,63 @@ footer{
     padding: 10px;
     font-weight: bold;
     cursor: pointer;
+}
+
+/* ---- BASKET PAGE RESPONSIVE ---- */
+
+@media (max-width: 900px) {
+    .bakset-page {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Summary moves below products */
+    .basket-summary {
+        width: 100%;
+        position: static;
+        order: 2;
+    }
+
+    .basket-info {
+        order: 1;
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* Make table readable on phones */
+    .basket-info table,
+    .basket-info thead,
+    .basket-info tbody,
+    .basket-info th,
+    .basket-info td,
+    .basket-info tr {
+        display: block;
+    }
+
+    .basket-info thead {
+        display: none;
+    }
+
+    .basket-info tr {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .basket-info td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border: none;
+    }
+
+    .basket-info td::before {
+        content: attr(data-label);
+        font-weight: bold;
+    }
+
+    .basket-info img {
+        max-width: 60px;
+    }
 }
