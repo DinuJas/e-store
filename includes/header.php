@@ -30,6 +30,8 @@ if ($result && $row = $result->fetch_assoc())
         <?php echo htmlspecialchars($username) ?>
     </div>
 
-    <img src="pictures/temp_basket.jpg" width="50px" height="50px">
+    <a href="basket.php">
+        <img src="pictures/temp_basket.jpg" width="50px" height="50px">
+    </a>
 </div>
 </header>

@@ -9,7 +9,11 @@ if (isset($_GET["product_id"]))
     $product_id = $_GET["product_id"];   
     
     // Get product info
-    $stmt = $conn->prepare("SELECT image, name, description, price, product_info FROM products WHERE product_id = ?");
+    $stmt = $conn->prepare("
+        SELECT image, name, description, price, product_info 
+        FROM products 
+        WHERE product_id = ?
+    ");
     $stmt->bind_param("i", $product_id);
     $stmt->execute();
     $product_info = $stmt->get_result();
