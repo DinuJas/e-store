@@ -46,7 +46,7 @@ $conn->close();
                             <img src="pictures/<?php echo htmlspecialchars($row["image"]); ?>" width="350px" height="400px">
                             <span><?php echo htmlspecialchars($row["name"]); ?></span>
                             <span><?php echo htmlspecialchars($row["description"]); ?></span>
-                            <span><?php echo htmlspecialchars($row["price"]); ?>,-</span>
+                            <span><?php echo number_format(htmlspecialchars($row["price"])); ?>,-</span>
                         </a>
                     </div>
                 <?php endwhile; ?>
