@@ -31,7 +31,7 @@ if ($result && $row = $result->fetch_assoc())
     </div>
 
     <a href="basket.php">
-        <img src="pictures/temp_basket.jpg" width="50px" height="50px">
+        <img src="pictures/temp_basket.png" width="50px" height="50px">
     </a>
 </div>
 </header>
