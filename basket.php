@@ -42,6 +42,16 @@ $stmt->execute();
 $result = $stmt->get_result();
 $products = $result->fetch_all(MYSQLI_ASSOC);
 
+// Calculate total quantity and price for summary
+$total_quantity = 0;
+$total_price = 0;
+
+foreach ($products as $item)
+{
+    $total_quantity += $item["quantity"];
+    $total_price += $item["price"] * $item["quantity"];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +65,9 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
 <body>
     <div class="container">
         <main>
-            <div class="inner-main">
+        <div class="inner-main">
+            <div class="bakset-page">
+                <div class="basket-info">
                 <h1>Basket</h1>
 
                 <?php if (empty($products)): ?>
@@ -76,16 +88,34 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                                     <img src="pictures/<?= htmlspecialchars($item["image"]) ?>" width="75px">
                                 </td>
                                 <td><?= htmlspecialchars($item["name"]) ?></td>
-                                <td><?= number_format($item["price"], 2) ?>,-</td>
+                                <td><?= number_format(htmlspecialchars($item["price"]), 2) ?>,-</td>
                                 <td><?= (int)$item["quantity"] ?></td>
                                 <td>
-                                    <?= number_format($item["price"] * $item["quantity"], 2) ?>,-
+                                    <?= number_format(htmlspecialchars($item["price"] * $item["quantity"]), 2) ?>,-
                                 </td>
                             </tr>
                     <?php endforeach; ?>
                     </table>
                 <?php endif; ?>
+                </div>
+
+                <!-- Summary of products and go to payment -->
+                <div class="basket-summary">
+                    <h2>Summary</h2>
+
+                    <?php if (empty($products)): ?>
+                        <p>No items in basket.</p>
+                    <?php else: ?>
+                        <p><strong>Total items:</strong> <?= htmlspecialchars($total_quantity) ?></p>
+                        <p><strong>Total price:</strong> <?= number_format(htmlspecialchars($total_price), 2) ?>,-</p>
+
+                        <form>
+                            <button type="submit">Place order</button>
+                        </form>
+                    <?php endif; ?>
+                </div>
             </div>
+        </div>
         </main>
     </div>
 
