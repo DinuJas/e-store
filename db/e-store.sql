@@ -37,8 +37,6 @@ CREATE TABLE `baskets` (
 -- Dumping data for table `baskets`
 --
 
-INSERT INTO `baskets` (`basket_id`, `user_id`, `status`) VALUES
-(1, 1, 'active');
 
 -- --------------------------------------------------------
 
@@ -56,10 +54,6 @@ CREATE TABLE `basket_products` (
 -- Dumping data for table `basket_products`
 --
 
-INSERT INTO `basket_products` (`basket_id`, `product_id`, `quantity`) VALUES
-(1, 1, 1),
-(1, 2, 1),
-(1, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -79,8 +73,6 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `user_id`, `total_price`, `status`, `created_at`) VALUES
-(1, 1, 3317.00, 'pending', '2026-01-22 20:31:04');
 
 -- --------------------------------------------------------
 
@@ -100,10 +92,6 @@ CREATE TABLE `order_items` (
 -- Dumping data for table `order_items`
 --
 
-INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`, `price_at_purchase`) VALUES
-(1, 1, 1, 1, 1119.00),
-(2, 1, 2, 1, 1999.00),
-(3, 1, 3, 1, 199.00);
 
 -- --------------------------------------------------------
 
@@ -171,8 +159,6 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES
-(1, 'Jason_Mo', 'dominiqjason@gmail.com', '$2y$12$3FphDa.RKXzP8Jj9DSfAi.zRTlglbA3IBvoOvbJRp/Y9gM1VAYEHq');
 
 --
 -- Indexes for dumped tables
