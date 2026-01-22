@@ -21,11 +21,11 @@ git clone https://github.com/DinuJas/e-store.git
 cd e-store
 ```
 ### Steg 2:
-Logg inn i MySQL og oprett databasen:
+Logg inn i MySQL og opprett databasen:
 ```bash
-mysql -u root -p -e "CREATE DATABASE nettbutikk;"
+mysql -u root -p -e "CREATE DATABASE e-store;"
 ```
-(Bruk rett MySQL brukar om du ikkje brukar root.)
+(Bruk rett MySQL brukar om du ikkje bruker root.)
 
 ### Steg 3:
 Databasestrukturen ligger i db/schema.sql.
