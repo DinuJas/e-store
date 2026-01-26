@@ -8,6 +8,34 @@ if (!isset($_SESSION["user_id"]))
     header("Location: login.php");
     exit();
 }
+
+$user_id = $_SESSION["user_id"];
+
+// Get data  
+$stmt = $conn->prepare("
+    SELECT order_id, total_price
+    FROM orders
+    WHERE user_id = ?
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+$order_id = $row["order_id"];
+$total_price = $row["total_price"];
+
+$stmt = $conn->prepare("
+    SELECT order_id, product_id, quantity, price_at_purchase
+    FROM order_items
+    WHERE order_id = ?
+");
+$stmt->bind_param("i", $order_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$items = $result->fetch_assoc();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +63,7 @@ if (!isset($_SESSION["user_id"]))
                             <input type="text"><br>
                             <label>Card expiration date:</label><br>
                             <input type="date"><br>
-                            <label>Card cvc:</label><br>
+                            <label>Card cvv:</label><br>
                             <input type="number"><br>
 
                             <label>Address:</label><br>

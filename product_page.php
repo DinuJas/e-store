@@ -19,6 +19,9 @@ if (isset($_GET["product_id"]))
     $product_info = $stmt->get_result();
     $row = $product_info->fetch_assoc();
 }
+
+$stmt->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>
