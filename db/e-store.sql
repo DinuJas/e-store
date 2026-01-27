@@ -88,6 +88,8 @@ CREATE TABLE `order_items` (
   `price_at_purchase` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+ALTER TABLE order_items
+ADD UNIQUE KEY unique_order_product (order_id, product_id);
 --
 -- Dumping data for table `order_items`
 --
