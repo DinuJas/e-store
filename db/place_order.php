@@ -10,8 +10,6 @@ if (!isset($_SESSION["user_id"])) {
 $user_id   = (int)$_SESSION["user_id"];
 $basket_id = (int)$_GET["basket_id"];
 
-// TODO: when ordering a new order while other order is not paid for / baskets status = 'active' 
-// it adds a new order but i just want to add the current items to the current order 
 
 // Get the current basket and check if the basket is still active
 $stmt = $conn->prepare("SELECT status FROM baskets WHERE user_id = ?");

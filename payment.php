@@ -59,7 +59,7 @@ $shipping_cost = 100;
                 <div class="payment-page">
                     <div class="payment-info">
                         <h3>Contact information</h3>
-                        <form>
+                        <form action="db/contact_info.php" method="POST">
                             <label>First name:</label><br>
                             <input type="text"><br>
                             <label>Second name:</label><br>
@@ -126,7 +126,6 @@ $shipping_cost = 100;
             </div>
         </main>
     </div>
-
     <?php require "includes/footer.php"; ?>
 </body>
 
