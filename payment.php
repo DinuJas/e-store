@@ -25,7 +25,7 @@ $order_id = (int)$row["order_id"];
 
 // Join products with order_items and get every item for this order
 $stmt = $conn->prepare("
-    SELECT p.image, p.name, p.price, o.quantity
+    SELECT p.product_id, p.image, p.name, p.price, o.quantity
     FROM products p
     JOIN order_items o ON p.product_id = o.product_id
     WHERE o.order_id = ?
@@ -86,7 +86,7 @@ $shipping_cost = 100;
                         </form>
                     </div>
 
-                    <!== TODO: add delete button for order_items. And finish able to pay for things==>
+                    <!-- TODO: Finish able to pay for things -->
                         <div class="payment-products">
                             <h3>Your products</h3>
 
@@ -100,6 +100,7 @@ $shipping_cost = 100;
                                         <th>Price</th>
                                         <th>Quantity</th>
                                         <th>Total</th>
+                                        <th>Delete</th>
                                     </tr>
 
                                     <?php foreach ($products as $item): ?>
@@ -111,6 +112,7 @@ $shipping_cost = 100;
                                             <td><?= $item["price"] ?></td>
                                             <td><?= $item["quantity"] ?></td>
                                             <td><?= $item["price"] ?></td>
+                                            <td><a href="db/remove_item.php?product_id=<?= $item["product_id"] ?>">X</a></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </table>
