@@ -148,6 +148,7 @@ footer {
 }
 .basket-info td a {
   text-decoration: none;
+  color: red;
 }
 
 .basket-info th {
@@ -290,6 +291,7 @@ footer {
 }
 .payment-products td a {
   text-decoration: none;
+  color: red;
 }
 
 .payment-products th {

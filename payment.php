@@ -104,7 +104,6 @@ $shipping_cost = 100;
             </div>
         </main>
     </div>
-
     <?php require "includes/footer.php"; ?>
 </body>
 
