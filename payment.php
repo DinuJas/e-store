@@ -58,70 +58,48 @@ $shipping_cost = 100;
             <div class="inner-main">
                 <div class="payment-page">
                     <div class="payment-info">
-                        <h3>Contact information</h3>
-                        <form>
-                            <label>First name:</label><br>
-                            <input type="text"><br>
-                            <label>Second name:</label><br>
-                            <input type="text"><br>
-
-                            <label>Card number:</label><br>
-                            <input type="text"><br>
-                            <label>Card expiration date:</label><br>
-                            <input type="date"><br>
-                            <label>Card cvv:</label><br>
-                            <input type="number"><br>
-
-                            <label>Address:</label><br>
-                            <input type="text"><br>
-                            <label>Post code:</label><br>
-                            <input type="number"><br>
-
-                            <label>Email:</label><br>
-                            <input type="text"><br>
-                            <label>Phone number:</label><br>
-                            <input type="text"><br>
-
-                            <button type="submit">Order</button>
-                        </form>
-                    </div>
+                    <h3>Contact information</h3>
 
                     <!-- TODO: Finish able to pay for things -->
-                        <div class="payment-products">
-                            <h3>Your products</h3>
+                    <div class="payment-products">
+                        <h3>Your products</h3>
 
-                            <?php if (empty($products)): ?>
-                                <p>No order items</p>
-                            <?php else: ?>
-                                <table>
+                        <?php if (empty($products)): ?>
+                            <p>No order items</p>
+                        <?php else: ?>
+                            <table>
+                                <tr>
+                                    <th>Pictures</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Delete</th>
+                                </tr>
+
+                                <?php foreach ($products as $item): ?>
                                     <tr>
-                                        <th>Pictures</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
-                                        <th>Delete</th>
+                                        <td>
+                                            <img src="pictures/<?= $item["image"] ?>" width="75px">
+                                        </td>
+                                        <td><?= $item["name"] ?></td>
+                                        <td><?= $item["price"] ?></td>
+                                        <td><?= $item["quantity"] ?></td>
+                                        <td><?= $item["price"] ?></td>
+                                        <td><a href="db/remove_item.php?product_id=<?= $item["product_id"] ?>">X</a></td>
                                     </tr>
+                                <?php endforeach; ?>
+                            </table>
 
-                                    <?php foreach ($products as $item): ?>
-                                        <tr>
-                                            <td>
-                                                <img src="pictures/<?= $item["image"] ?>" width="75px">
-                                            </td>
-                                            <td><?= $item["name"] ?></td>
-                                            <td><?= $item["price"] ?></td>
-                                            <td><?= $item["quantity"] ?></td>
-                                            <td><?= $item["price"] ?></td>
-                                            <td><a href="db/remove_item.php?product_id=<?= $item["product_id"] ?>">X</a></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </table>
+                            <h4>Details</h4>
+                            <p>Shipping: 100,-</p>
+                            <p>Total price: <?= $total_price + $shipping_cost ?></p>
+                        <?php endif; ?>
 
-                                <h4>Details</h4>
-                                <p>Shipping: 100,-</p>
-                                <p>Total price: <?= $total_price + $shipping_cost ?></p>
-                            <?php endif; ?>
-                        </div>
+                        <form>
+                            <button>Order</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </main>

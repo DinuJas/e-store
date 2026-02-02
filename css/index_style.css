@@ -255,7 +255,6 @@ footer {
 
 .payment-info form {
   display: flex;
-  flex-direction: column;
   gap: 10px;
 }
 
@@ -263,6 +262,7 @@ footer {
 .payment-info button {
   padding: 8px;
   font-weight: bold;
+  width: 150px;
 }
 
 .payment-info button {
@@ -287,6 +287,9 @@ footer {
   border-bottom: 1px solid #ccc;
   padding: 10px;
   text-align: center;
+}
+.payment-products td a {
+  text-decoration: none;
 }
 
 .payment-products th {
