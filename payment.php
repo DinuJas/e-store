@@ -9,12 +9,15 @@ if (!isset($_SESSION["user_id"])) {
 }
 
 $user_id = $_SESSION["user_id"];
+$total_price = 0;
 
-// Get order_id from orders table
+// Get order_id that is 'pending' from orders table
 $stmt = $conn->prepare("
     SELECT order_id 
     FROM orders
-    WHERE user_id = ?
+    WHERE status = 'pending'
+    AND user_id = ?
+    LIMIT 1
 ");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -23,7 +26,7 @@ $row = $result->fetch_assoc();
 
 $order_id = (int)$row["order_id"];
 
-// Join products with order_items and get every item for this order
+// Join products with order_items and get every item for this order that is 'pending'
 $stmt = $conn->prepare("
     SELECT p.product_id, p.image, p.name, p.price, o.quantity
     FROM products p
@@ -96,7 +99,7 @@ $shipping_cost = 100;
                             <p>Total price: <?= $total_price + $shipping_cost ?></p>
                         <?php endif; ?>
 
-                        <form>
+                        <form action="db/order.php" method="POST">
                             <button>Order</button>
                         </form>
                     </div>

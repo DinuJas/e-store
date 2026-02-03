@@ -40,6 +40,7 @@ $conn->close();
         <div class="inner-main">
             <h1>TEST PRODUCTS</h1>
             <div class="product-display">
+                <!-- TODO: fix stock -->
                 <?php while ($row = $product_info->fetch_assoc()): ?>
                     <div class="product">
                         <a href="product_page.php?product_id=<?php echo htmlspecialchars($row["product_id"]) ?>">
