@@ -40,23 +40,27 @@ if ($row = $result->fetch_assoc()) {
         exit();
     }
     else {
-        $stmt = $conn->prepare("DELETE FROM order_items WHERE product_id = ?");
-        $stmt->bind_param("i", $product_id);
+        $stmt = $conn->prepare("
+            DELETE oi
+            FROM order_items oi
+            JOIN orders o ON oi.order_id = o.order_id
+            WHERE o.user_id = ?
+            AND oi.product_id = ?
+        ");
+        $stmt->bind_param("ii", $user_id, $product_id);
         $stmt->execute();
-
-
     }
     
     // Recalculate total_price
     $stmt = $conn->prepare("
         UPDATE orders o
-        SET o.total_price = (
+        SET o.total_price = COALESCE((
             SELECT SUM(oi.quantity * p.price)
             FROM order_items oi
             JOIN products p ON p.product_id = oi.product_id
             WHERE oi.order_id = o.order_id
-        )
-        WHERE o.user_id = ? 
+        ), 0)
+        WHERE o.user_id = ?
     ");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
