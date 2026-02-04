@@ -62,13 +62,11 @@ $shipping_cost = 100;
                 <div class="payment-page">
                     <div class="payment-info">
                     <h3>Contact information</h3>
-
-                    <!-- TODO: Finish able to pay for things -->
                     <div class="payment-products">
                         <h3>Your products</h3>
 
                         <?php if (empty($products)): ?>
-                            <p>No order items</p>
+                            <p>No ordered items</p>
                         <?php else: ?>
                             <table>
                                 <tr>

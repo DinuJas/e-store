@@ -10,12 +10,6 @@ if (!isset($_SESSION["user_id"])) {
 $user_id = (int)$_SESSION["user_id"];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // TODO: make order status = paid
-    // make sure that when orders status = paid, that it makes a new order
-    // make baskets status = ordered
-    // make sure that when basket status = ordered, that it makes a new basket
-    
-
     // Get order that is pending
     $stmt = $conn->prepare("
         SELECT order_id
@@ -63,5 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ");
     $stmt->bind_param("ii", $basket_id, $user_id);
     $stmt->execute();
+
+    header("Location: ../my_orders.php");
+    exit();
 }
+
+// TODO: fix when ordered an item and then removing every ite from that order messes things up
+
+$stmt->close();
+$conn->close();
 ?>
