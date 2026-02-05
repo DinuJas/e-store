@@ -9,7 +9,7 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_id = (int)$_SESSION["user_id"];
 
-// 1. Get active basket
+// Get active basket
 $stmt = $conn->prepare("
     SELECT basket_id 
     FROM baskets 
@@ -26,7 +26,7 @@ if (!$row = $result->fetch_assoc()) {
 
 $basket_id = (int)$row["basket_id"];
 
-// 2. Get or create pending order
+// Get or create pending order
 $stmt = $conn->prepare("
     SELECT order_id 
     FROM orders 
@@ -49,7 +49,7 @@ if ($row = $result->fetch_assoc()) {
     $order_id = $conn->insert_id;
 }
 
-// 3. Get basket products
+// Get basket products
 $stmt = $conn->prepare("
     SELECT bp.product_id, bp.quantity, p.price
     FROM basket_products bp
@@ -60,7 +60,7 @@ $stmt->bind_param("i", $basket_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// 4. Insert / update order items
+// Insert / update order items
 $stmt = $conn->prepare("
     INSERT INTO order_items
         (order_id, product_id, quantity, price_at_purchase)
@@ -80,7 +80,7 @@ while ($item = $result->fetch_assoc()) {
     $stmt->execute();
 }
 
-// 5. Redirect to payment
+// Redirect to payment
 header("Location: ../payment.php?order_id=" . $order_id);
 exit();
 

@@ -10,8 +10,7 @@ if (!isset($_SESSION["user_id"])) {
 
 $user_id = (int)$_SESSION["user_id"];
 
-// TODO: show my orderes and if no orders than say that you have no orders
-// Get all paid orders
+// Get all paid orders (should also show shipped and completed orders)
 $stmt = $conn->prepare("
     SELECT order_id, total_price, status
     FROM orders

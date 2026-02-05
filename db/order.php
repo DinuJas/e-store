@@ -62,8 +62,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     exit();
 }
 
-// TODO: fix when ordered an item and then removing every ite from that order messes things up
-
 $stmt->close();
 $conn->close();
 ?>

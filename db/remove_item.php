@@ -40,6 +40,7 @@ if ($row = $result->fetch_assoc()) {
         exit();
     }
     else {
+        // Delete all order items
         $stmt = $conn->prepare("
             DELETE oi
             FROM order_items oi
@@ -48,6 +49,15 @@ if ($row = $result->fetch_assoc()) {
             AND oi.product_id = ?
         ");
         $stmt->bind_param("ii", $user_id, $product_id);
+        $stmt->execute();
+
+        // Delete the order it self
+        $stmt = $conn->prepare("
+            DELETE FROM orders
+            WHERE status = 'pending'
+            AND user_id = ?
+        ");
+        $stmt->bind_param("i", $user_id);
         $stmt->execute();
     }
     

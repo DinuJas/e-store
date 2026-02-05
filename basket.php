@@ -111,7 +111,6 @@ foreach ($products as $item)
                         <p><strong>Total items:</strong> <?= htmlspecialchars($total_quantity) ?></p>
                         <p><strong>Total price:</strong> <?= number_format($total_price, 2, '.', ' ') ?>,-</p>
 
-                        <!-- TODO: fix getting basket_id without using $_GET (prevent someone adding someone else order_id in URL)-->
                         <form action="db/place_order.php" method="POST">
                             <button type="submit">Place order</button>
                         </form>
