@@ -314,3 +314,69 @@ footer {
   }
 }
 
+/* ---- MY ORDERS PAGE ---- */
+.my-orders-page {
+  margin-top: 30px;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.my-orders-page h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.my-orders-page table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.my-orders-page th,
+.my-orders-page td {
+  border-bottom: 1px solid #ccc;
+  padding: 12px;
+  text-align: center;
+}
+
+.my-orders-page th {
+  background-color: #e0e0e0;
+}
+
+.my-orders-page tr:hover {
+  background-color: #eee;
+}
+
+/* ---- MY ORDERS RESPONSIVE ---- */
+
+@media (max-width: 600px) {
+  .my-orders-page table,
+  .my-orders-page thead,
+  .my-orders-page tbody,
+  .my-orders-page th,
+  .my-orders-page td,
+  .my-orders-page tr {
+    display: block;
+  }
+
+  .my-orders-page thead {
+    display: none;
+  }
+
+  .my-orders-page tr {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  .my-orders-page td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border: none;
+  }
+
+  .my-orders-page td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+}

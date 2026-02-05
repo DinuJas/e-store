@@ -12,10 +12,11 @@ $user_id = (int)$_SESSION["user_id"];
 
 // Get all paid orders (should also show shipped and completed orders)
 $stmt = $conn->prepare("
-    SELECT order_id, total_price, status
+    SELECT order_id, total_price, status, created_at
     FROM orders
     WHERE status = 'paid'
     AND user_id = ?
+    ORDER BY created_at DESC
 ");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -46,6 +47,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                                 <th>Order ID</th>
                                 <th>Total Price</th>
                                 <th>Status</th>
+                                <th>Created At</th>
                             </tr>
 
                             <?php foreach($products as $item): ?>
@@ -53,6 +55,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                                 <td><?= $item["order_id"] ?></td>
                                 <td><?= number_format($item["total_price"], 2, '.', ' ') ?></td>
                                 <td><?= $item["status"] ?></td>
+                                <td><?= $item["created_at"] ?></td>
                             </tr>
                             <?php endforeach ?>
                         </table>
