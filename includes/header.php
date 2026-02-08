@@ -26,8 +26,10 @@ if ($result && $row = $result->fetch_assoc())
     </form>
 
     <div>
-        <img src="pictures/temp_logo.jpg" width="50px" height="50px">
-        <?php echo htmlspecialchars($username) ?>
+        <a href="profile.php">
+            <img src="pictures/temp_logo.jpg" width="50px" height="50px">
+            <?php echo htmlspecialchars($username) ?>
+        </a>
     </div>
 
     <a href="basket.php">

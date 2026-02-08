@@ -21,9 +21,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-
     $order_id = (int)$row["order_id"];
-    
+
+    // Calculate total price from order_items
+    $total_price = 0;
+    $shipping_cost = 100;
+
+    $stmt = $conn->prepare("
+        SELECT oi.quantity, p.price
+        FROM order_items oi
+        JOIN products p ON oi.product_id = p.product_id
+        WHERE oi.order_id = ?
+    ");
+    $stmt->bind_param("i", $order_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while ($item = $result->fetch_assoc()) {
+        $total_price += $item["quantity"] * $item["price"];
+    }
+
+    $total_price += $shipping_cost; // include shipping
+
+    // Update orders with total price
+    $stmt = $conn->prepare("
+        UPDATE orders
+        SET total_price = ?
+        WHERE order_id = ?
+    ");
+    $stmt->bind_param("di", $total_price, $order_id);
+    $stmt->execute();
+
     // Update orders status to 'paid'
     $stmt = $conn->prepare("
         UPDATE orders
@@ -45,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-
     $basket_id = (int)$row["basket_id"];
 
     // Update baskets status to 'ordered'
