@@ -25,6 +25,7 @@ if (!isset($_SESSION["user_id"])) {
     <main>
         <div class="inner-main">
             <h1>Profile</h1>
+            <a href="payment.php">Current order</a><br>
             <a href="my_orders.php">My orders</a>
         </div>
     </main>

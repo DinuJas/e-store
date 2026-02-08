@@ -61,7 +61,7 @@ $shipping_cost = 100;
             <div class="inner-main">
                 <div class="payment-page">
                     <div class="payment-info">
-                    <h3>Contact information</h3>
+                    <h3>Current order</h3>
                     <div class="payment-products">
                         <h3>Your products</h3>
 

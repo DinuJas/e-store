@@ -14,6 +14,34 @@ if ($result && $row = $result->fetch_assoc())
 {
     $username = $row["username"];
 }
+
+// Show how many items that are in your basket
+$basket_count = 0;
+
+$stmt = $conn->prepare("
+    SELECT basket_id
+    FROM baskets
+    WHERE status = 'active'
+    AND user_id = ?
+");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+$basket_id = (int)$row["basket_id"];
+
+$stmt = $conn->prepare("
+    SELECT SUM(quantity) AS total_items
+    FROM basket_products
+    WHERE basket_id = ?
+");
+$stmt->bind_param("i", $basket_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+
+$basket_count = $row["total_items"];
 ?>
 
 <header>
@@ -34,6 +62,6 @@ if ($result && $row = $result->fetch_assoc())
 
     <a href="basket.php">
         <img src="pictures/temp_basket.png" width="50px" height="50px">
+        <div><?php echo $basket_count ?></div>
     </a>
-</div>
 </header>
