@@ -40,8 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     while ($item = $result->fetch_assoc()) {
         $total_price += $item["quantity"] * $item["price"];
     }
-
-    $total_price += $shipping_cost; // include shipping
+    
+    // include shipping
+    $total_price += $shipping_cost; 
 
     // Update orders with total price
     $stmt = $conn->prepare("
@@ -51,6 +52,37 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     ");
     $stmt->bind_param("di", $total_price, $order_id);
     $stmt->execute();
+
+
+    /* Stock */
+    // Get all pending order items for user
+    $stmt = $conn->prepare("
+        SELECT oi.product_id, oi.quantity
+        FROM order_items oi
+        JOIN orders o ON oi.order_id = o.order_id
+        WHERE o.status = 'pending'
+        AND o.user_id = ?
+    ");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Prepare stock update statement
+    $stmt = $conn->prepare("
+        UPDATE products
+        SET stock = stock - ?
+        WHERE product_id = ?
+        AND quantity >= ?
+    ");
+
+    while ($row = $result->fetch_assoc()) {
+        $quantity = (int)$row['quantity'];
+        $product_id = (int)$row['product_id'];
+        $quantity = (int)$row['quantity'];
+
+        $stmt->bind_param("ii", $quantity, $product_id);
+        $stmt->execute();
+    }
 
     // Update orders status to 'paid'
     $stmt = $conn->prepare("

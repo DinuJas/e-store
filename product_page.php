@@ -10,7 +10,7 @@ if (isset($_GET["product_id"]))
     
     // Get product info
     $stmt = $conn->prepare("
-        SELECT image, name, description, price, product_info 
+        SELECT image, name, description, price, product_info, stock 
         FROM products 
         WHERE product_id = ?
     ");
@@ -54,6 +54,8 @@ $conn->close();
 
                             <label>Quantity</label>
                             <input type="number" name="quantity" value="1" min="1">
+
+                            <label>Stock: <?php echo htmlspecialchars($row["stock"]) ?></label>
 
                             <button type="submit">Add to basket</button>
                         </form>

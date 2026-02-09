@@ -60,8 +60,10 @@ $basket_count = $row["total_items"];
         </a>
     </div>
 
-    <a href="basket.php">
-        <img src="pictures/temp_basket.png" width="50px" height="50px">
-        <div><?php echo $basket_count ?></div>
-    </a>
+    <div>
+        <a href="basket.php">
+            <img src="pictures/temp_basket.png" width="50px" height="50px">
+            <?php echo $basket_count ?>
+        </a>
+    </div>
 </header>
